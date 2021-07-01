@@ -380,7 +380,7 @@ while($row=mysqli_fetch_assoc($data)){
 						<h2 class="title text-center">Features Items</h2>
 						<?php  
 						
-						 $get_product=get_product($con,'latest',4);
+						 $get_product=get_product($con,4);
 						 foreach( $get_product as $list) {  
 							 ?>
 						<div class="col-sm-4">
