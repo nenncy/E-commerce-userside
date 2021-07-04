@@ -2,10 +2,15 @@
 include 'dbconnection.php';
 include 'functions.php';
 
+// $cat=mysqli_query($con,"SELECT category from categaries where id=$cat_id");
 if(isset($_GET['id']) && $_GET['id']!=''){
 	$cat_id=mysqli_real_escape_string($con,$_GET['id']);
+	
+	
 	if($cat_id>0){
-		$get_pro=get_product($con,'',$cat_id);
+		$get_pro=get_product($con,$cat_id);
+		$cat=mysqli_query($con,"SELECT * from categaries where id=$cat_id");
+     	$res=mysqli_fetch_assoc($cat);
 	}else{
 		?>
 		<script>
@@ -192,22 +197,7 @@ while($row=mysqli_fetch_assoc($data)){
 										</a>
 									</h4>
 								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-											<li><a href="#">Armani</a></li>
-											<li><a href="#">Prada</a></li>
-											<li><a href="#">Dolce and Gabbana</a></li>
-											<li><a href="#">Chanel</a></li>
-											<li><a href="#">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
+								
 							</div>
 							
 							
@@ -230,7 +220,7 @@ while($row=mysqli_fetch_assoc($data)){
 				</div>
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Category Item</h2>
+						<h2 class="title text-center"><?php echo $res['category'];?> Item</h2>
 						<?php  
 					      
 						 foreach( $get_pro as $list) {  
@@ -254,8 +244,7 @@ while($row=mysqli_fetch_assoc($data)){
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+									<li><a  href="product-details.php?id=<?php echo $list['id']?>" class="btn btn-default add-to-cart">Product Details</a></li>
 									</ul>
 								</div>
 							</div>

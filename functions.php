@@ -20,21 +20,18 @@ function get_safe_value($con,$str){
 
 }
 
-function get_product($con, $limit='' , $cat_id=''){
+function get_product($con , $cat_id='' , $product_id=''){
 
     $query="SELECT * FROM product where status=1";
 
     if($cat_id!=''){
-		$query.=" and category_id=$cat_id ";
+		$query.=" and product.category_id=$cat_id ";
+	}
+	if($product_id=''){
+		$query.=" and product.id=$product_id ";
 	}
 
-    
-    
-     if($limit!=null){
-         $query.="limit $limit";
-     }
-    
-     
+ 
     $data=mysqli_query($con,$query);
     $res=array();
     while($row=mysqli_fetch_assoc($data)){

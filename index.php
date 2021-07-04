@@ -380,7 +380,7 @@ while($row=mysqli_fetch_assoc($data)){
 						<h2 class="title text-center">Features Items</h2>
 						<?php  
 						
-						 $get_product=get_product($con,4);
+						 $get_product=get_product($con);
 						 foreach( $get_product as $list) {  
 							 ?>
 						<div class="col-sm-4">
@@ -391,6 +391,7 @@ while($row=mysqli_fetch_assoc($data)){
 											<?php echo "<img src='../media/product".$list['image']."' >" ?>
 											<p><?php echo $list['name'];?></p>
 											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										     
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
@@ -402,8 +403,8 @@ while($row=mysqli_fetch_assoc($data)){
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+										
+										<li><a  href="product-details.php?id=<?php echo $list['id']?>" class="btn btn-default add-to-cart">Product Details</a></li>
 									</ul>
 								</div>
 							</div>
@@ -434,7 +435,7 @@ while($row=mysqli_fetch_assoc($data)){
 								</div> -->
 							</div>
 						</div>
-						<div class="col-sm-4">
+						<!-- <div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
@@ -886,7 +887,7 @@ while($row=mysqli_fetch_assoc($data)){
 												
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="col-sm-4">
 										<div class="product-image-wrapper">
 											<div class="single-products">
