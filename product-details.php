@@ -342,7 +342,7 @@ $res=mysqli_query($con,$query);
 							
 
 						</div>
-					
+					<form action="manage_cart.php?" method="POST">
 						<div class="col-sm-7">
 							<div class="product-information">
 								<img src = <?php "<img src='../media/product".$result['image']."' >"?> class="newarrival" alt="" />
@@ -355,21 +355,22 @@ $res=mysqli_query($con,$query);
                                 <p><?php echo "Description:","<br>", $result['des']?></p>
 
 								<p>categories: <?php echo "Categories:","<br>", $result['category_id']?></p>
-								<ul  class="nav nav-pills nav-stacked"> -->
-
-						 
-							
+								<ul  class="nav nav-pills nav-stacked">
+								
 								<p><b>Availability:</b> In Stock</p>
 								<p><b>Condition:</b> New</p>
 
 								<p><b>Brand:</b> E-SHOPPER</p>
-								<button type="button" class="btn btn-fefault cart" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">
+								<button type="submit" name="add_to_cart" value="Add to cart" class="btn btn-fefault cart" >
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
-								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+									<input type="hidden" name="item_name" value="<?php echo $result['name']; ?>"> 
+									<input type="hidden" name="price" value="<?php echo $result['saving_price']; ?>"> 
+								    <input type="hidden" name="qty" value="<?php echo $result['qty']; ?>"> 
 							</div><!--/product-information-->
 						</div>
+						</form>
 					</div><!--/product-details-->
 
 					<?php } ?>

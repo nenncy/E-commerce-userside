@@ -104,7 +104,7 @@ while($row=mysqli_fetch_assoc($data)){
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
 								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<li><a href="login.php"><i class="fa fa-lock"></i> Login</a></li>
 							</ul>
 						</div>
@@ -383,6 +383,7 @@ while($row=mysqli_fetch_assoc($data)){
 						 $get_product=get_product($con);
 						 foreach( $get_product as $list) {  
 							 ?>
+							<form action="manage_cart.php?" method="POST">
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -390,14 +391,21 @@ while($row=mysqli_fetch_assoc($data)){
 											<h2>₹<?php echo $list['saving_price'];?></h2>
 											<?php echo "<img src='../media/product".$list['image']."' >" ?>
 											<p><?php echo $list['name'];?></p>
-											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											
 										     
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
 												<h2>₹<?php echo $list['saving_price'];?></h2>
 												<p>Easy Polo Black Edition</p>
-												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												
+										<button type="submit" name="add_to_cart" value="Add to cart" class="btn btn-fefault cart" >
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</button>
+									<input type="hidden" name="item_name" value="<?php echo $list['name']; ?>"> 
+									<input type="hidden" name="price" value="<?php echo $list['saving_price']; ?>"> 
+									<input type="hidden" name="qty" value="<?php echo $result['qty']; ?>">
 											</div>
 										</div>
 								</div>
@@ -409,6 +417,7 @@ while($row=mysqli_fetch_assoc($data)){
 								</div>
 							</div>
 						</div>
+						</form>
 						<?php  } ?>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">

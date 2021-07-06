@@ -1,3 +1,11 @@
+<?php
+include 'dbconnection.php';
+
+session_start();
+  $total='0';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +120,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="index.php">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="shop.html">Products</a></li>
@@ -151,8 +159,17 @@
 				  <li class="active">Shopping Cart</li>
 				</ol>
 			</div>
+			<?php  
+			if(isset($_SESSION['cart'])){
+				foreach($_SESSION['cart'] as $key=> $value){
+					$total=$total+$value['price'];
+				
+			?>
+			
+			
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
+				
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Item</td>
@@ -163,34 +180,38 @@
 							<td></td>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/one.png" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
+								<h4><?php echo $value['item_name']; ?></h4>
 								<p>Web ID: 1089772</p>
 							</td>
 							<td class="cart_price">
-								<p>$59</p>
+								<p><?php echo $value['price']; ?></p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
+									<input type="number" value='<?php echo $value['qty']; ?>' min='1' max='10'>
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
+								<p class="cart_total_price"><?php echo $total; ?></p>
 							</td>
+							<form action="manage_cart.php" method="POST">
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="manage_cart.php"><i class="fa fa-times"></i></a>
+                                <input type="hidden" name="item_name" value="$value['item_name">
 							</td>
+							</form>
 						</tr>
 
-						<tr>
+					
+                       
+						<!-- <tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/two.png" alt=""></a>
 							</td>
@@ -214,8 +235,8 @@
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<td class="cart_product">
 								<a href=""><img src="images/cart/three.png" alt=""></a>
 							</td>
@@ -239,10 +260,11 @@
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
+			<?php  }  }?>
 		</div>
 	</section> <!--/#cart_items-->
 
